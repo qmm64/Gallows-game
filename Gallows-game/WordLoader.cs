@@ -54,6 +54,10 @@ namespace Gallows_game
             }
         }
 
+        /// <summary>
+        /// Получение категорий слов
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetCategories()
         {
             try
@@ -73,6 +77,11 @@ namespace Gallows_game
             }
         }
 
+        /// <summary>
+        /// Получение случайного слова из указанной категории
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         public string GetWord(string category)
         {
             try
@@ -83,6 +92,31 @@ namespace Gallows_game
                 return word;
             }
             catch(Exception ex)
+            {
+                Console.WriteLine($"Ошибка получения случайного слова. Текст ошибки: {ex.Message}");
+                Environment.Exit(1);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Получение случайного слова из любой категории
+        /// </summary>
+        /// <returns></returns>
+        public string GetWord()
+        {
+            try
+            {
+                List<string> words = new List<string>();
+                foreach(var element in _words.Values)
+                {
+                    words.AddRange(element);
+                }
+                Random random = new();
+                string word = words[random.Next(words.Count)];
+                return word;
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка получения случайного слова. Текст ошибки: {ex.Message}");
                 Environment.Exit(1);
