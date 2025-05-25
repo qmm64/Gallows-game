@@ -1,11 +1,10 @@
-﻿using System.Text;
-
+﻿
 namespace Gallows_game
 {
     internal class WordLoader
     {
-        Dictionary<string, List<string>> _words;
-        private string _path;
+        private readonly Dictionary<string, List<string>> _words;
+        private readonly string _path;
 
         public WordLoader() 
         {
@@ -18,7 +17,7 @@ namespace Gallows_game
             try
             {
                 string text;
-                using (StreamReader reader = new StreamReader(path))
+                using (StreamReader reader = new(path))
                 {
                     text = reader.ReadToEnd();
                 }
@@ -36,12 +35,11 @@ namespace Gallows_game
         {
             try
             {
-                List<string> wordsWithCategories = new List<string>();
                 Dictionary<string, List<string>> words = new Dictionary<string, List<string>>();
-                wordsWithCategories = text.Split("\n").ToList();
-                foreach (var i in wordsWithCategories)
+                List<string> wordsWithCategories = text.Split("\n").ToList();
+                foreach (var elements in wordsWithCategories)
                 {
-                    var wordsWithCategory = i.Split(new string[] { ", ", ": ","\r"},StringSplitOptions.RemoveEmptyEntries).ToList();
+                    var wordsWithCategory = elements.Split([", ", ": ","\r"],StringSplitOptions.RemoveEmptyEntries).ToList();
                     string category = wordsWithCategory[0];
                     wordsWithCategory.Remove(category);
                     words.Add(category,wordsWithCategory);
