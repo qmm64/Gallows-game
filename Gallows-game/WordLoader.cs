@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Gallows_game
 {
     internal class WordLoader
     {
-        private List<string> _words;
+        Dictionary<string, List<string>> _words;
         private string _path;
 
         public WordLoader() 
@@ -36,13 +32,20 @@ namespace Gallows_game
             }
         }
 
-        private List<string> ParseWords(string text)
+        private Dictionary<string, List<string>> ParseWords(string text)
         {
             try
             {
-                StringBuilder word = new StringBuilder();
-                List<string> words = new List<string>();
-                words = text.Split(", ").ToList();
+                List<string> wordsWithCategories = new List<string>();
+                Dictionary<string, List<string>> words = new Dictionary<string, List<string>>();
+                wordsWithCategories = text.Split("\n").ToList();
+                foreach (var i in wordsWithCategories)
+                {
+                    var wordsWithCategory = i.Split(new string[] { ", ", ": ","\r"},StringSplitOptions.RemoveEmptyEntries).ToList();
+                    string category = wordsWithCategory[0];
+                    wordsWithCategory.Remove(category);
+                    words.Add(category,wordsWithCategory);
+                }
                 return words;
             }
             catch (Exception ex)
@@ -53,12 +56,32 @@ namespace Gallows_game
             }
         }
 
-        public string GetWord()
+        public List<string> GetCategories()
         {
             try
             {
+                var categories = new List<string>();
+                foreach (var category in _words)
+                {
+                    categories.Add(category.Key);
+                }
+                return categories;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка получения категории. Текст ошибки: {ex.Message}");
+                Environment.Exit(1);
+                return null;
+            }
+        }
+
+        public string GetWord(string category)
+        {
+            try
+            {
+                _words.TryGetValue(category, out List<string> words);
                 Random random = new Random();
-                string word = _words[random.Next(_words.Count)];
+                string word = words[random.Next(words.Count)];
                 return word;
             }
             catch(Exception ex)
