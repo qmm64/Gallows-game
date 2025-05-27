@@ -42,6 +42,19 @@ namespace Gallows_game
                 return false;
             }
         }
+        public string GetCurrentProgress()
+        {
+            char[] display = Word.Select(ch => guessedLetters.Contains(ch) ? ch : '_').ToArray();
+            return string.Join(" ", display);
+        }
+        public IEnumerable<char> GetWrongLetters()
+        {
+            return wrongLetters.OrderBy(c => c);
+        }
+        public IEnumerable<char> GetGuessedLetters()
+        {
+            return guessedLetters.OrderBy(c => c);
+        }
 
     }
 }
