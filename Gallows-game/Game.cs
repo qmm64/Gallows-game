@@ -55,6 +55,32 @@ namespace Gallows_game
         {
             return guessedLetters.OrderBy(c => c);
         }
+        public GameState CheckGameState()
+        {
+            if (Word.All(ch => guessedLetters.Contains(ch)))
+            {
+                return GameState.Win;
+            }
+            if (Errors >= MaxErrors)
+            {
+                return GameState.Lose;
+            }
+            return GameState.Ongoing;
 
+        }
+        public void Resert(string newWord)
+        {
+            Word = newWord.ToUpper();
+            guessedLetters.Clear();
+            wrongLetters.Clear();
+        }
     }
+    public enum GameState
+    {
+        Win,
+        Lose,
+        Ongoing
+    }
+
 }
+
