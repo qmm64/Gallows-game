@@ -24,6 +24,24 @@ namespace Gallows_game
         {
             Word = word.ToUpper();
         }
+        public bool ChechLetter(char letter)
+        {
+            letter = char.ToUpper(letter);
+
+            if (guessedLetters.Contains(letter) || wrongLetters.Contains(letter))
+                return false;
+
+            if (Word.Contains(letter))
+            {
+                guessedLetters.Add(letter);
+                return true;
+            }
+            else
+            {
+                wrongLetters.Contains(letter);
+                return false;
+            }
+        }
 
     }
 }
