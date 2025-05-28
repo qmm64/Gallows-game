@@ -38,7 +38,7 @@ namespace Gallows_game
             }
             else
             {
-                wrongLetters.Contains(letter);
+                wrongLetters.Add(letter);
                 return false;
             }
         }
