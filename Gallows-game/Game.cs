@@ -68,7 +68,7 @@ namespace Gallows_game
             return GameState.Ongoing;
 
         }
-        public void Resert(string newWord)
+        public void Restart(string newWord)
         {
             Word = newWord.ToUpper();
             guessedLetters.Clear();
