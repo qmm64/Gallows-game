@@ -145,7 +145,7 @@ namespace Gallows_game
             else if (input == "н" || input == "n" || input == "no")
                 return false;
             else
-                    Console.Write("Пожалуйста, введите 'д' или 'н': ");
+                    Console.Write("Введите 'д' или 'н': ");
             }
         }
 
@@ -177,6 +177,23 @@ namespace Gallows_game
 
                 Console.WriteLine("Некорректный ввод. Попробуйте ещё раз.");
             }
+        }
+
+        public void Logo()
+        {
+            Console.WriteLine(
+                        @"
+                THE IGRA 
+                ВИСЕЛИЦА
+
+                  +---+
+                  |   |
+                  O   |
+                 /|\  |
+                 / \  |
+                      |
+                =========" + "\n\n"
+            );
         }
     }
 }
