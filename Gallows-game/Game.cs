@@ -24,7 +24,9 @@ namespace Gallows_game
         {
             Word = word.ToUpper();
         }
-        public bool ChechLetter(char letter)
+
+        //проверка угадал ли букву
+        public bool CheckLetter(char letter)
         {
             letter = char.ToUpper(letter);
 
@@ -42,7 +44,9 @@ namespace Gallows_game
                 return false;
             }
         }
-        public string GetCurrentProgress()
+
+        // отображение угадываемого слова
+        public string GetCurrentProgress() 
         {
             char[] display = Word.Select(ch => guessedLetters.Contains(ch) ? ch : '_').ToArray();
             return string.Join(" ", display);
@@ -55,7 +59,9 @@ namespace Gallows_game
         {
             return guessedLetters.OrderBy(c => c);
         }
-        public GameState CheckGameState()
+        
+        // проверка на окончание игры
+        public GameState CheckGameState() 
         {
             if (Word.All(ch => guessedLetters.Contains(ch)))
             {

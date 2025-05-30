@@ -75,6 +75,7 @@ namespace Gallows_game
         ========="
         };
 
+        // вывод подвешанного челика
         public void DrawHangman(int errors)
         {
             if (errors < 0) errors = 0;
@@ -82,17 +83,21 @@ namespace Gallows_game
 
             Console.WriteLine(hangmanStages[errors]);
         }
+        // отображение угаданного слова
         public void DisplayWordProgress(string progress)
         {
             Console.WriteLine("Слово: " + progress);
         }
 
-        public void DisplayGuessedLetters(IEnumerable<char> correct, IEnumerable<char> wrong)
+        // отображение введенных букв
+        public void DisplayGuessedLetters(IEnumerable<char> correct, IEnumerable<char> wrong, string category)
         {
+            Console.WriteLine("Тема: " + category);
             Console.WriteLine("Угаданные буквы: " + string.Join(" ", correct));
             Console.WriteLine("Ошибочные буквы: " + string.Join(" ", wrong));
         }
 
+        // ввод вывод
         public char IOInterface(HashSet<char> usedLetters)
         {
             while (true)
@@ -134,6 +139,7 @@ namespace Gallows_game
             Console.WriteLine($"Вы проиграли. Загаданное слово: {word}");
         }
 
+        // типо менюшка
         public bool PromptNewGame()
         {
             Console.Write("Начать новую игру? (д/н): ");
@@ -149,6 +155,7 @@ namespace Gallows_game
             }
         }
 
+        // отображение категорий
         public void DisplayCategories(IEnumerable<string> categories) 
         {
             Console.WriteLine("Доступные категории:");
@@ -160,6 +167,7 @@ namespace Gallows_game
             }
         }
 
+        // ввод категории
         public string PromptCategory(IEnumerable<string> categories) // выбор категории
         {
             Console.WriteLine("Выберите категорию по номеру или нажмите Enter для случайной категории:");
