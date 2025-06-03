@@ -5,9 +5,10 @@
         public static void Main()
         {
             UI ui = new UI(); 
-            List<string> categories = new List<string>() { "category1", "category2", "category2", "category4", "category5" };
+            List<string> categories = new List<string>() { "categoryfirst", "categorysec", "categorythird", "categoryfourth", "categoryfifth" };
             while (true)
             {
+                Console.Clear();
                 ui.Logo();
                 if (ui.PromptNewGame())
                 {
@@ -26,35 +27,35 @@
                             Console.Clear();
                             // отрисовка виселицы принимает ошибки игрока
                             ui.DrawHangman(game.Errors);
-                            // отображение угуданного слова в формате примерсл_ва
+                            // отображение угаданного слова в формате "примерсл_ва"
                             ui.DisplayWordProgress(game.GetCurrentProgress());
-                            // отображение использованных букв
+                            // отображение использованных букв(неправельные_ответы, загаданное_слово)
                             ui.DisplayGuessedLetters(game.GetGuessedLetters(),
                                 game.GetWrongLetters(),
                                 game.Word
                                 );
+
                             // ввод вывод и проверка введенной буквы 
                             
-                            string allUsedLetters = string.Concat(game.GetWrongLetters(), game.GetGuessedLetters());
-                            HashSet<char> hash = new HashSet<char>();
-                            
-                            foreach (char c in allUsedLetters)
-                                hash.Add(c);
-                            game.CheckLetter(ui.IOInterface(hash));
+                            HashSet<char> allUsedLetters = new HashSet<char>(game.GetWrongLetters()); // поле для объединения всех использованных букв
+                            allUsedLetters.UnionWith(game.GetGuessedLetters()); // объединение всех букв в один сет
+                            game.CheckLetter(ui.IOInterface(allUsedLetters)); // запуск интерфейса ввода\вывода, определение буквы на наличие в слове или в использованных наборах
                         }
                         else if (gameState == GameState.Win)
                         {
                             Console.Clear();
                             ui.DisplayWin(game.Word);
+                            ui.DrawHangman(game.Errors);
                             Console.ReadKey();
-                            continue;
+                            break;
                         }
                         else if (gameState == GameState.Lose)
                         {
                             Console.Clear();
                             ui.DisplayLose(game.Word);
+                            ui.DrawHangman(game.Errors);
                             Console.ReadKey();
-                            continue;
+                            break;
                         }
                     }
                 }
