@@ -6,6 +6,7 @@
         {
             UI ui = new UI(); 
             List<string> categories = new List<string>() { "categoryfirst", "categorysec", "categorythird", "categoryfourth", "categoryfifth" };
+            Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>(); // <категория, набор слов>
             while (true)
             {
                 Console.Clear();
@@ -16,7 +17,7 @@
                     // вывод категории
                     ui.DisplayCategories(categories);
                     // создание объекта игры ( ввод пользователя )
-                    Game game = new Game(ui.PromptCategory(categories));
+                    Game game = new Game(dict, ui.PromptCategory(dict.Keys));
 
                     while (true)
                     {

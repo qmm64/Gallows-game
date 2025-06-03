@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,8 +21,9 @@ namespace Gallows_game
         //счетчика ошибок 
         public int Errors => wrongLetters.Count;
 
-        public Game(string word)
+        public Game(Dictionary<string, List<string>> dict, string category)
         {
+            string word = GetWordFromCategory(dict, category);
             Word = word.ToUpper();
         }
 
@@ -81,7 +83,7 @@ namespace Gallows_game
             wrongLetters.Clear();
         }
 
-        public string GetWordFromCategory(Dictionary<string, List<string>> dict, string category)
+        private string GetWordFromCategory(Dictionary<string, List<string>> dict, string category)
         {
             return dict[category][new Random().Next(dict[category].Capacity)];
         }
