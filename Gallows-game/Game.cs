@@ -21,12 +21,10 @@ namespace Gallows_game
         //счетчика ошибок 
         public int Errors => wrongLetters.Count;
 
-        public Game(Dictionary<string, List<string>> dict, string category)
+        public Game(string word)
         {
-            string word = GetWordFromCategory(dict, category);
             Word = word.ToUpper();
         }
-
         //проверка угадал ли букву
         public bool CheckLetter(char letter)
         {

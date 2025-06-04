@@ -178,7 +178,7 @@ namespace Gallows_game
                 Console.Write("Категория: ");
                 var input = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(input))
-                    return cats[new Random().Next(0, cats.Count()-1)];
+                    return null;
 
                 if (int.TryParse(input, out int num) && num >= 1 && num <= cats.Count)
                     return cats[num - 1];
