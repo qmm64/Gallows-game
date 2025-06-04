@@ -80,11 +80,6 @@ namespace Gallows_game
             guessedLetters.Clear();
             wrongLetters.Clear();
         }
-
-        private string GetWordFromCategory(Dictionary<string, List<string>> dict, string category)
-        {
-            return dict[category][new Random().Next(dict[category].Capacity)];
-        }
     }
     public enum GameState
     {
