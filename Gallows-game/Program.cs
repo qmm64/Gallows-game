@@ -48,7 +48,7 @@
                                 // отображение использованных букв(неправельные_ответы, загаданное_слово)
                                 ui.DisplayGuessedLetters(game.GetGuessedLetters(),
                                     game.GetWrongLetters(),
-                                    game.Word
+                                    category
                                     );
 
                                 // ввод вывод и проверка введенной буквы 
