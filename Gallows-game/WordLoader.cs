@@ -63,9 +63,9 @@ namespace Gallows_game
             try
             {
                 var categories = new List<string>();
-                foreach (var category in _words)
+                foreach (var category in _words.Keys)
                 {
-                    categories.Add(category.Key);
+                    categories.Add(category);
                 }
                 return categories;
             }
